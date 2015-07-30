@@ -1,0 +1,58 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:textColor="@color/fontColor"
+    android:background="@color/mainColor"
+    tools:context="com.example.pepper.note.Content"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:textColor="@color/fontColor"
+        android:background="@color/mainColor"
+        android:textSize="25sp"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:layout_weight="0.9" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="0.1">
+
+
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_action_content_create"
+        android:textColor="@color/fontColor"
+        android:background="@color/mainColor"
+        android:id="@+id/edit_button"
+        android:layout_weight="1" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_action_action_info"
+        android:textColor="@color/fontColor"
+        android:background="@color/mainColor"
+        android:id="@+id/info_button"
+        android:layout_weight="1" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_action_action_delete"
+        android:textColor="@color/fontColor"
+        android:background="@color/mainColor"
+        android:id="@+id/delet_button"
+        android:layout_weight="1" />
+
+    </LinearLayout>
+</LinearLayout>

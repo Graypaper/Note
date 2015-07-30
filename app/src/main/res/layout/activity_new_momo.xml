@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:textColor="@color/fontColor"
+    android:background="@color/mainColor"
+    tools:context="com.example.pepper.note.NewMomo"
+    android:weightSum="1">
+
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:textColor="@color/fontColor"
+        android:background="@color/mainColor"
+        android:layout_weight="1"
+        android:hint="@string/editText_hint"
+        android:textCursorDrawable="@drawable/cursor"
+        android:gravity="top|left" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/confirm"
+        android:textColor="@color/fontColor"
+        android:background="@color/mainColor"
+        android:textSize="25sp"
+        android:textAllCaps="false"
+        android:id="@+id/confirm_button"
+        android:layout_gravity="bottom" />
+</LinearLayout>
