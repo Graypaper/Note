@@ -31,13 +31,13 @@ public class MyDBHelper extends  SQLiteOpenHelper{
             //database.execSQL(ItemDAO.CREATE_TABLE);
             System.out.println("after new a db");
         }
-        /*
+
         Cursor dbCursor = database.query(ItemDAO.TABLE_NAME, null, null, null, null, null, null);
         String[] columnNames = dbCursor.getColumnNames();
         for(int i =0;i<columnNames.length;i++){
-            System.out.println(columnNames[i]);
+            System.out.println("data col " + columnNames[i]);
         }
-        */
+
         return database;
     }
     @Override

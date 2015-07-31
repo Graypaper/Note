@@ -58,7 +58,9 @@ public class NewMomo extends ActionBarActivity {
             else
                 title = str.substring(0, str.indexOf("\n"));
             String key = "memo";
-            Memo memo = new Memo(title,str,"today");
+
+            Memo memo = new Memo(title,str);
+            System.out.println("Memo title " + memo.getTitle());
             Intent intent = new Intent();
             Bundle bundle = new Bundle();
             bundle.putSerializable(key, memo);

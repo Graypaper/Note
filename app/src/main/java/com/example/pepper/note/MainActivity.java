@@ -30,26 +30,25 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //System.out.println("before show");
+        itemDAO = new ItemDAO(getApplicationContext());
+        findView();
         showList();
-        //System.out.println("after show");
-        newNotebtn = (Button)findViewById(R.id.newNote);
         setListener();
     }
 
-    public void showList(){
-        //System.out.println("before new itemDAO");
-        itemDAO = new ItemDAO(getApplicationContext());
-        //System.out.println("after new itemDAO");
+    public void findView(){
         listView = (ListView)findViewById(R.id.listView);
+        newNotebtn = (Button)findViewById(R.id.newNote);
+    }
+
+    public void showList(){
         memolist = itemDAO.getAll();
-        System.out.println("after getALL()");
         strList = new ArrayList<String>();
         Iterator<Memo> it = memolist.iterator();
         while(it.hasNext()){
-            String str = ((Memo)it.next()).getContent();
+            String str = ((Memo)it.next()).getTitle();
             strList.add(str);
-            System.out.println("it has next");
+            System.out.println("memo title: " + str);
         }
         listAdapter = new ArrayAdapter<String>(this,R.layout.listitem,R.id.listContent,strList);
         listView.setAdapter(listAdapter);
@@ -104,6 +103,8 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onActivityResult(int requestCode,int resultCode,Intent data){
         super.onActivityResult(requestCode,resultCode,data);
+        if(data==null)
+            return;
         switch(requestCode){
             case newMemo:
                 Bundle bundle  = data.getExtras();
@@ -116,8 +117,14 @@ public class MainActivity extends ActionBarActivity {
     }
 
     @Override
+    protected void onResume(){
+        super.onResume();
+        showList();
+        listAdapter.notifyDataSetChanged();
+    }
+
+    @Override
     protected void onDestroy(){
         super.onDestroy();
-        //itemDAO.close();
     }
 }

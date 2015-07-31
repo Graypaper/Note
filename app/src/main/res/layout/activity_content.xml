@@ -6,23 +6,31 @@
     android:textColor="@color/fontColor"
     android:background="@color/mainColor"
     tools:context="com.example.pepper.note.Content"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingTop="5dp">
 
-    <TextView
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView"
+        android:id="@+id/editText"
         android:textColor="@color/fontColor"
         android:background="@color/mainColor"
         android:textSize="25sp"
         android:layout_row="0"
         android:layout_column="0"
-        android:layout_weight="0.9" />
+        android:layout_weight="0.9"
+        android:editable="false"
+        android:gravity="top|left"
+        android:inputType="text"
+        android:textCursorDrawable="@drawable/cursor"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="horizontal"
+        android:id="@+id/linearlayout"
         android:layout_weight="0.1">
 
 
@@ -33,6 +41,7 @@
         android:src="@drawable/ic_action_content_create"
         android:textColor="@color/fontColor"
         android:background="@color/mainColor"
+        android:textCursorDrawable="@drawable/cursor"
         android:id="@+id/edit_button"
         android:layout_weight="1" />
 
@@ -51,8 +60,21 @@
         android:src="@drawable/ic_action_action_delete"
         android:textColor="@color/fontColor"
         android:background="@color/mainColor"
-        android:id="@+id/delet_button"
+        android:id="@+id/del_button"
         android:layout_weight="1" />
 
+
     </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/save_button"
+        android:textColor="@color/fontColor"
+        android:background="@color/mainColor"
+        android:text="@string/save"
+        android:textAllCaps="false"
+        android:textSize="25sp"
+        android:layout_weight="0.1"
+        android:visibility="gone" />
 </LinearLayout>

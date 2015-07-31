@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/fontColor"
+        android:background="@color/mainColor"
+        android:text="test"
+        android:id="@+id/infoText"
+        android:textSize="25sp"
+        android:enabled="false"
+        android:layout_gravity="center" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/info_ok_button"
+        android:text="@string/ok"
+        android:textSize="25sp"
+        android:textColor="@color/fontColor"
+        android:background="@color/mainColor"
+        android:layout_gravity="center" />
+</LinearLayout>

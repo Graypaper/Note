@@ -1,6 +1,9 @@
 package com.example.pepper.note;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  * Created by Pepper on 2015/7/29.
@@ -19,6 +22,12 @@ public class Memo implements Serializable{
         this.date = date;
     }
 
+    public Memo(String title,String content){
+        this.title = title;
+        this.content = content;
+        setDate();
+    }
+
     public Memo(String title,String content,String data){
         this.title =title;
         this.content = content;
@@ -31,5 +40,11 @@ public class Memo implements Serializable{
     public String getTitle(){return title;}
     public void setId(long id){this.id = id;}
     public void setDate(String date){this.date = date;}
+    public void setDate(){
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd HH:mm:ss");
+        Calendar cal = Calendar.getInstance();
+        this.date = dateFormat.format(cal.getTime());
+    }
     public void setContent(String content){this.content = content;}
+    public void setTitle(String title){this.title = title;}
 }

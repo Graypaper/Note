@@ -54,24 +54,26 @@ public class ItemDAO {
         long id = db.insert(TABLE_NAME, null, cv);
         memo.setId(id);
         System.out.println("after insert id: " + id);
+        Memo temp = get(id);
+        System.out.println("after insert date title " + memo.getTitle());
+        System.out.println("after insert date title " + temp.getTitle());
         return memo;
     }
 
 
     public boolean update(Memo memo) {
-
         ContentValues cv = new ContentValues();
+        cv.put(TITLE_COLUMN, memo.getTitle());
         cv.put(DATETIME_COLUMN, memo.getDate());
         cv.put(CONTENT_COLUMN, memo.getContent());
         String where = KEY_ID + "=" + memo.getId();
+        System.out.println("update date " + memo.getDate());
         return db.update(TABLE_NAME, cv, where, null) > 0;
     }
 
 
     public boolean delete(long id){
-
         String where = KEY_ID + "=" + id;
-
         return db.delete(TABLE_NAME, where , null) > 0;
     }
 
@@ -82,7 +84,6 @@ public class ItemDAO {
                 TABLE_NAME, null, null, null, null, null, null, null);
 
         while (cursor.moveToNext()) {
-            System.out.println("cursor got next");
             result.add(getRecord(cursor));
         }
 
@@ -92,21 +93,13 @@ public class ItemDAO {
 
 
     public Memo get(long id) {
-
         Memo memo = null;
-
         String where = KEY_ID + "=" + id;
-
         Cursor result = db.query(
                 TABLE_NAME, null, where, null, null, null, null, null);
-
-
         if (result.moveToFirst()) {
-
             memo = getRecord(result);
         }
-
-
         result.close();
 
         return memo;
@@ -118,8 +111,9 @@ public class ItemDAO {
         Memo result = new Memo();
 
         result.setId(cursor.getLong(0));
-        result.setContent(cursor.getString(1));
-        result.setDate(cursor.getString(2));
+        result.setTitle(cursor.getString(1));
+        result.setContent(cursor.getString(2));
+        result.setDate(cursor.getString(3));
 
         return result;
     }
