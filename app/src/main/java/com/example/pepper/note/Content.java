@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -93,27 +94,11 @@ public class Content extends ActionBarActivity {
                     linearLayout.setVisibility(View.GONE);
                     break;
                 case R.id.info_button:
-                    LayoutInflater layoutInflater = LayoutInflater.from(Content.this);
-                    View view = layoutInflater.inflate(R.layout.information,null);
-                    final Dialog dialog = new Dialog(Content.this);
-                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                    dialog.setContentView(view);
-                    EditText infoText = (EditText)dialog.findViewById(R.id.infoText);
-                    Button infoOkButton = (Button)dialog.findViewById(R.id.info_ok_button);
-                    infoText.setText("latest edit in " + memo.getDate());
-                    infoOkButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dialog.dismiss();
-                        }
-                    });
-                    dialog.show();
+                    infoAction();
                     break;
                 case R.id.del_button:
-                    if(!itemDAO.delete(memo.getId())){
-                        System.out.println("failed to delete");
-                    }
-                    finish();
+                    deleteAction();
+
                     break;
                 case R.id.save_button:
                     String str = editText.getText().toString();
@@ -135,5 +120,52 @@ public class Content extends ActionBarActivity {
                     break;
             }
         }
+    }
+
+    public void deleteAction(){
+        LayoutInflater layoutInflater = LayoutInflater.from(Content.this);
+        View view = layoutInflater.inflate(R.layout.deletcheck,null);
+        final Dialog dialog = new Dialog(Content.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(view);
+        Button yesButton = (Button)dialog.findViewById(R.id.yes_button);
+        Button noButton = (Button)dialog.findViewById(R.id.no_button);
+        yesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!itemDAO.delete(memo.getId())){
+                    System.out.println("failed to delete");
+                }
+                finish();
+            }
+        });
+
+        noButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
+    public void infoAction(){
+        LayoutInflater layoutInflater = LayoutInflater.from(Content.this);
+        View view = layoutInflater.inflate(R.layout.information,null);
+        final Dialog dialog = new Dialog(Content.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(view);
+        EditText infoText = (EditText)dialog.findViewById(R.id.infoText);
+        Button infoOkButton = (Button)dialog.findViewById(R.id.info_ok_button);
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        infoText.setText("latest edit in \n" + memo.getDate());
+        infoOkButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 }

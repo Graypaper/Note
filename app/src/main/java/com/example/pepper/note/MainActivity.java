@@ -4,9 +4,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -20,7 +22,6 @@ import java.util.List;
 
 public class MainActivity extends ActionBarActivity {
     private ListView listView;
-    private Button newNotebtn;
     private ArrayAdapter listAdapter;
     private final int newMemo = 1;
     private List<Memo> memolist;
@@ -38,7 +39,6 @@ public class MainActivity extends ActionBarActivity {
 
     public void findView(){
         listView = (ListView)findViewById(R.id.listView);
-        newNotebtn = (Button)findViewById(R.id.newNote);
     }
 
     public void showList(){
@@ -48,14 +48,14 @@ public class MainActivity extends ActionBarActivity {
         while(it.hasNext()){
             String str = ((Memo)it.next()).getTitle();
             strList.add(str);
-            System.out.println("memo title: " + str);
+            //System.out.println("memo title: " + str);
         }
+
         listAdapter = new ArrayAdapter<String>(this,R.layout.listitem,R.id.listContent,strList);
         listView.setAdapter(listAdapter);
     }
 
     public void setListener() {
-        newNotebtn.setOnClickListener(new NewButtonListener());
         listView.setOnItemClickListener(new ItemListener());
     }
     @Override
@@ -70,22 +70,29 @@ public class MainActivity extends ActionBarActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()){
+            case R.id.delete_item:
+                System.out.println("before set multi");
+                MemoAdapter memoAdapter = new MemoAdapter(this,R.layout.multi_listitem,memolist);
+                listView.setAdapter(memoAdapter);
+                listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+                listView.setMultiChoiceModeListener(new MultiItemListener());
+                listView.setOnItemClickListener(null);
+                System.out.println("after set multi");
+                /*
+                listAdapter = new ArrayAdapter<String>(this,R.layout.multi_listitem,strList);
+                //TODO
+                */listView.setAdapter(listAdapter);
+                //
+                //listView.setOnClickListener();
+                break;
+            case R.id.add_item:
+                Intent intent = new Intent(getBaseContext(),NewMomo.class);
+                startActivityForResult(intent,newMemo);
+                break;
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    class NewButtonListener implements View.OnClickListener{
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(getBaseContext(),NewMomo.class);
-            startActivityForResult(intent,newMemo);
-        }
     }
 
     class ItemListener implements AdapterView.OnItemClickListener{
@@ -97,6 +104,40 @@ public class MainActivity extends ActionBarActivity {
             bundle.putSerializable("memo",memo);
             intent.putExtras(bundle);
             startActivity(intent);
+        }
+    }
+
+    class MultiItemListener implements AbsListView.MultiChoiceModeListener{
+        @Override
+        public void onItemCheckedStateChanged(ActionMode mode, int position, long id, boolean checked) {
+            // Capture total checked items
+            //final int checkedCount = listview.getCheckedItemCount();
+            // Set the CAB title according to total checked items
+            //mode.setTitle(checkedCount + " Selected");
+            // Calls toggleSelection method from ListViewAdapter Class
+            //listviewadapter.toggleSelection(position);
+            System.out.println(id + " have been clicked");
+        }
+
+        @Override
+        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            //mode.getMenuInflater().inflate(R.menu.menu_main, menu);
+            return true;
+        }
+
+        @Override
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            return false;
+        }
+
+        @Override
+        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            return false;
+        }
+
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+
         }
     }
 

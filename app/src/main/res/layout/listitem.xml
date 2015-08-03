@@ -9,8 +9,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
         android:textColor="@color/fontColor"
-        android:background="@color/mainColor"
+        android:background="@drawable/border"
         android:id="@+id/listContent"
         android:layout_gravity="center_horizontal"
-        android:textSize="30sp" />
+        android:textSize="40sp" />
 </LinearLayout>

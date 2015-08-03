@@ -33,22 +33,7 @@
             android:layout_gravity="center_horizontal"
             android:textColor="@color/fontColor"
             android:background="@color/mainColor"
-            android:layout_weight="0.9" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:text="@string/new_note"
-            android:textAllCaps="false"
-            android:textSize="40sp"
-            android:layout_gravity="center"
-            android:id="@+id/newNote"
-            android:layout_weight="0.1"
-            android:textColor="@color/fontColor"
-            android:background="@color/mainColor"
-            android:gravity="center"
-            android:shadowColor="@android:color/background_light"
-            android:singleLine="false" />
+            android:layout_weight="1" />
     </LinearLayout>
 
 

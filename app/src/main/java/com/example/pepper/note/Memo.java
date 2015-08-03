@@ -41,9 +41,10 @@ public class Memo implements Serializable{
     public void setId(long id){this.id = id;}
     public void setDate(String date){this.date = date;}
     public void setDate(){
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/mm/dd HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         Calendar cal = Calendar.getInstance();
         this.date = dateFormat.format(cal.getTime());
+        System.out.println(this.date);
     }
     public void setContent(String content){this.content = content;}
     public void setTitle(String title){this.title = title;}

@@ -9,5 +9,8 @@
     <string name="title_activity_content">Content</string>
     <string name="save">Save</string>
     <string name="ok">OK</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
+    <string name="delet_check">Delete this note?</string>
 
 </resources>
